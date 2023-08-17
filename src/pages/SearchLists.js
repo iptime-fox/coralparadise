@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { fetchData, getOptions } from '../utils/fetchData';
+import Header from '../components/Header';
 
 const SearchLists = () => {
   useEffect(() => {
@@ -13,7 +14,11 @@ const SearchLists = () => {
     // getSearchData();
   }, []);
 
-  return <div>SearchLists</div>;
+  return (
+    <div>
+      <Header />
+    </div>
+  );
 };
 
 export default SearchLists;

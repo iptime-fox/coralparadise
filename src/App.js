@@ -1,3 +1,4 @@
+import { Route, Routes } from 'react-router-dom';
 import Details from './pages/Details';
 import Home from './pages/Home';
 import SearchLists from './pages/SearchLists';
@@ -5,9 +6,11 @@ import SearchLists from './pages/SearchLists';
 function App() {
   return (
     <div>
-      <Home />
-      <SearchLists />
-      <Details />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/search-lists' element={<SearchLists />} />
+        <Route path='/details' element={<Details />} />
+      </Routes>
     </div>
   );
 }
