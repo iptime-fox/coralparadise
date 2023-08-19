@@ -5,13 +5,13 @@ import SearchLists from './pages/SearchLists';
 
 function App() {
   return (
-    <div>
+    <>
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/search-lists' element={<SearchLists />} />
         <Route path='/details' element={<Details />} />
       </Routes>
-    </div>
+    </>
   );
 }
 

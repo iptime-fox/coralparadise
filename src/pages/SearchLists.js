@@ -15,9 +15,9 @@ const SearchLists = () => {
   }, []);
 
   return (
-    <div>
+    <>
       <Header />
-    </div>
+    </>
   );
 };
 
