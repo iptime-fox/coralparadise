@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { fetchData, getOptions } from '../utils/fetchData';
 import Header from '../components/Header';
+import { Helmet } from 'react-helmet';
 
 const SearchLists = () => {
   useEffect(() => {
@@ -16,6 +17,9 @@ const SearchLists = () => {
 
   return (
     <>
+      <Helmet>
+        <title>ColralParadise</title>
+      </Helmet>
       <Header />
     </>
   );
