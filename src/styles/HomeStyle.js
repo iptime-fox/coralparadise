@@ -76,6 +76,7 @@ export const InputWrapper = styled.div`
     padding: 0.25rem 0;
     font-size: 16px;
     color: #999;
+    cursor: pointer;
   }
 `;
 export const CalenderWrapper = styled.div`
