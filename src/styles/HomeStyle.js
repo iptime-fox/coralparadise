@@ -72,6 +72,7 @@ export const InputWrapper = styled.div`
   }
   input {
     border: none;
+    width: 70%;
     outline: none;
     padding: 0.25rem 0;
     font-size: 16px;

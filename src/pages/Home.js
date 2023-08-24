@@ -41,15 +41,17 @@ const Home = () => {
     checkOut: getFormattedDate(new Date()),
   });
   const inputRef = useRef();
+  const [main, setMain] = useState([]);
   useEffect(() => {
     const getSearchData = async () => {
       const getData = await fetchData(
         'https://airbnb13.p.rapidapi.com/search-location?location=Paris&checkin=2023-09-16&checkout=2023-09-17&adults=1&children=0&infants=0&pets=0&page=1&currency=USD',
         getOptions
       );
-      console.log(getData.results[0].images[0]);
+      setMain(getData.results[0]);
+      console.log(getData.results[0]);
     };
-    // getSearchData();
+    getSearchData();
   }, []);
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -77,7 +79,6 @@ const Home = () => {
       </Helmet>
       <Header />
       <HomeWrapper>
-        {/* <img src={getData.results[0].images[0]} alt='' /> */}
         <LandingPage>
           <SearchBoxWrapper>
             <SearchBox>
@@ -91,7 +92,7 @@ const Home = () => {
                   <input
                     type='text'
                     ref={inputRef}
-                    placeholder='한국'
+                    placeholder='여행지 검색'
                     name='location'
                     value={state.location}
                     onChange={handleOnChange}
