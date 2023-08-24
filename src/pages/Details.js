@@ -1,5 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import Header from '../components/Header';
 
 const Details = () => {
   return (
@@ -7,7 +8,7 @@ const Details = () => {
       <Helmet>
         <title>ColralParadise</title>
       </Helmet>
-      Details
+      <Header />
     </div>
   );
 };

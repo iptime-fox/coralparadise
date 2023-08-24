@@ -1,17 +1,5 @@
 import { styled } from 'styled-components';
 
-export const HomeWrapper = styled.div`
-  width: 100%;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  margin: auto;
-  align-items: center;
-  padding: 2rem;
-  padding-top: 8rem;
-  max-width: 1400px;
-`;
-
 export const LandingPage = styled.div`
   width: 100%;
   display: flex;
@@ -62,10 +50,6 @@ export const TitleWrapper = styled.div`
   margin-top: 0;
 `;
 export const InputWrapper = styled.div`
-  border: 1px solid #e9e9e9;
-  border-radius: 10px;
-  padding: 0.25rem 0.875rem;
-  margin: 0.5rem;
   p {
     font-size: 14px;
     font-weight: 400;
@@ -80,8 +64,24 @@ export const InputWrapper = styled.div`
     cursor: pointer;
   }
 `;
-export const CalenderWrapper = styled.div`
+
+export const UpperInputs = styled.div`
   display: flex;
+  border: 1px solid #e9e9e9;
+  border-radius: 10px;
+  padding: 0.25rem 0.875rem;
+  margin: 0.5rem;
+  div {
+    width: 50%;
+  }
+`;
+
+export const LowerInputs = styled.div`
+  display: flex;
+  border: 1px solid #e9e9e9;
+  border-radius: 10px;
+  padding: 0.25rem 0.875rem;
+  margin: 0.5rem;
   div {
     width: 50%;
   }

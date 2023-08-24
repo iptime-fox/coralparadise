@@ -2,16 +2,36 @@ import { Route, Routes } from 'react-router-dom';
 import Details from './pages/Details';
 import Home from './pages/Home';
 import SearchLists from './pages/SearchLists';
+import GlobalStyles from './styles/GlobalStyle';
+import { ThemeProvider } from 'styled-components';
+
+const theme = {
+  pc: '1280px',
+  tablet: '768px',
+  mobile: '480px',
+
+  colors: {
+    fonts: '#333',
+    point: '#ff6666',
+  },
+
+  el: {
+    sectionPadding: '3rem 0',
+  },
+};
 
 function App() {
   return (
-    <>
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/search-lists' element={<SearchLists />} />
-        <Route path='/details' element={<Details />} />
-      </Routes>
-    </>
+    <ThemeProvider theme={theme}>
+      <div>
+        <GlobalStyles />
+        <Routes>
+          <Route path='/' element={<Home />}></Route>
+          <Route path='/search-lists' element={<SearchLists />}></Route>
+          <Route path='/details/:id' element={<Details />}></Route>
+        </Routes>
+      </div>
+    </ThemeProvider>
   );
 }
 

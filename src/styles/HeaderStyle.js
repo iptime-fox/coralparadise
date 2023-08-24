@@ -9,7 +9,7 @@ export const NavList = styled.div`
   width: 100%;
   height: auto;
   padding: 1.25rem 2rem;
-  max-width: 1400px;
+  max-width: 1280px;
   position: fixed;
   margin: auto;
   background-color: white;
