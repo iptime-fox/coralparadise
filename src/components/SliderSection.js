@@ -8,6 +8,7 @@ import { RiArrowLeftSLine, RiArrowRightSLine } from 'react-icons/ri';
 import { SliderWrapper } from '../styles/SliderStyle';
 import { Container } from '../styles/ContainerStyle';
 import { fetchData, getOptions } from '../utils/fetchData';
+import { Link } from 'react-router-dom';
 
 const SliderSection = () => {
   const settings = {
@@ -49,7 +50,7 @@ const SliderSection = () => {
                       ))} */}
                     </span>
                   </p>
-                  {/* <Link to={`/details/${linkId}`}>자세히 보기</Link> */}
+                  <Link to={`/details/${data.id}`}>자세히 보기</Link>
                 </div>
               </div>
             ))}
