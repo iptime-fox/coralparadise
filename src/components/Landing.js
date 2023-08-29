@@ -16,29 +16,20 @@ import {
   SubmitBtn,
   UpperInputs,
   LowerInputs,
-} from '../styles/HomeStyle';
+  InputNumWrapper,
+} from '../styles/LandingStyle';
 import { Container } from '../styles/ContainerStyle';
-
-const getFormattedDate = (targetDate) => {
-  let year = targetDate.getFullYear();
-  let month = targetDate.getMonth() + 1;
-  let date = targetDate.getDate();
-  if (month < 10) {
-    month = `0${month}`;
-  }
-  if (date < 10) {
-    date = `0${date}`;
-  }
-  return `${year}-${month}-${date}`;
-};
+import { getFormattedTodayDate, getFormattedTomorrowDate } from '../utils/util';
 
 const Landing = () => {
   const navigate = useNavigate();
   const [state, setState] = useState({
     location: '',
-    number: '',
-    checkIn: getFormattedDate(new Date()),
-    checkOut: getFormattedDate(new Date()),
+    adults: 2,
+    children: 0,
+    pets: 0,
+    checkIn: getFormattedTodayDate(new Date()),
+    checkOut: getFormattedTomorrowDate(new Date()),
   });
   const inputRef = useRef();
   const [main, setMain] = useState([]);
@@ -67,9 +58,27 @@ const Landing = () => {
       inputRef.current.focus();
       return;
     }
+    if (state.adults === '') {
+      e.preventDefault();
+      alert('검색하실 위치를 입력하세요');
+      inputRef.current.focus();
+      return;
+    }
+    if (state.children === '') {
+      e.preventDefault();
+      alert('검색하실 위치를 입력하세요');
+      inputRef.current.focus();
+      return;
+    }
+    if (state.pets === '') {
+      e.preventDefault();
+      alert('검색하실 위치를 입력하세요');
+      inputRef.current.focus();
+      return;
+    }
     e.preventDefault();
     navigate(
-      `/search-lists?location=${state.location}&checkIn=${state.checkIn}&checkOut=${state.checkOut}&adults=${state.number}`
+      `/search-lists?location=${state.location}&checkIn=${state.checkIn}&checkOut=${state.checkOut}&adults=${state.adults}&children=${state.children}&pets=${state.pets}`
     );
   };
   return (
@@ -97,14 +106,38 @@ const Landing = () => {
                   </InputWrapper>
                   <InputWrapper>
                     <p>인원</p>
-                    <input
-                      type='number'
-                      ref={inputRef}
-                      placeholder='인원수'
-                      name='number'
-                      value={state.number}
-                      onChange={handleOnChange}
-                    />
+                    <InputNumWrapper>
+                      <div>
+                        <span>성인</span>
+                        <input
+                          type='number'
+                          ref={inputRef}
+                          name='adults'
+                          value={state.adults}
+                          onChange={handleOnChange}
+                        />
+                      </div>
+                      <div>
+                        <span>어린이</span>
+                        <input
+                          type='number'
+                          ref={inputRef}
+                          name='children'
+                          value={state.children}
+                          onChange={handleOnChange}
+                        />
+                      </div>
+                      <div>
+                        <span>반려동물</span>
+                        <input
+                          type='number'
+                          ref={inputRef}
+                          name='pets'
+                          value={state.pets}
+                          onChange={handleOnChange}
+                        />
+                      </div>
+                    </InputNumWrapper>
                   </InputWrapper>
                 </UpperInputs>
                 <LowerInputs>

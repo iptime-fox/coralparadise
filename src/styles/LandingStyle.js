@@ -71,8 +71,8 @@ export const UpperInputs = styled.div`
   border-radius: 10px;
   padding: 0.25rem 0.875rem;
   margin: 0.5rem;
-  div {
-    width: 50%;
+  div:first-child {
+    width: 80%;
   }
 `;
 
@@ -100,4 +100,18 @@ export const SubmitBtn = styled.button`
   border-radius: 10px;
   background-color: #ff6666;
   color: #fff;
+`;
+
+export const InputNumWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  input {
+    font-size: 14px;
+  }
+  div {
+    span {
+      font-size: 14px;
+      color: #999;
+    }
+  }
 `;

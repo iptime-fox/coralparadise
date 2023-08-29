@@ -8,6 +8,7 @@ import list from '../assets/list.jpg';
 import { Container } from '../styles/ContainerStyle';
 import { RiH1 } from 'react-icons/ri';
 import { ClipLoader } from 'react-spinners';
+import { SubmitWrapper } from '../styles/LandingStyle';
 
 const SearchListsBoxWrapper = styled.div``;
 
@@ -18,6 +19,7 @@ const SearchListsBox = styled.form`
   border-radius: 1.5rem;
   display: flex;
   column-gap: 1rem;
+  max-width: 900px;
 `;
 
 const SearchBtn = styled.button`
@@ -30,6 +32,20 @@ const SearchBtn = styled.button`
   padding-right: 1rem;
   &:nth-child(4) {
     border: none;
+    div {
+      display: flex;
+      align-items: center;
+
+      span {
+        font-size: 14px;
+      }
+      div {
+        display: flex;
+      }
+      input {
+        width: 33.33%;
+      }
+    }
   }
   &:nth-child(5) {
     border: none;
@@ -112,12 +128,16 @@ const SearchLists = () => {
   const location = new URLSearchParams(loca.search).get('location');
   const checkIn = new URLSearchParams(loca.search).get('checkIn');
   const checkOut = new URLSearchParams(loca.search).get('checkOut');
-  const number = new URLSearchParams(loca.search).get('adults');
+  const adults = new URLSearchParams(loca.search).get('adults');
+  const children = new URLSearchParams(loca.search).get('children');
+  const pets = new URLSearchParams(loca.search).get('pets');
   const [state, setState] = useState({
     location: location,
     checkIn: checkIn,
     checkOut: checkOut,
-    number: number,
+    adults: adults,
+    children: children,
+    pets: pets,
   });
   const [like, setLike] = useState(false);
   const [rooms, setRooms] = useState([]);
@@ -131,7 +151,7 @@ const SearchLists = () => {
   useEffect(() => {
     const getSearchData = async () => {
       const getData = await fetchData(
-        `https://airbnb13.p.rapidapi.com/search-location?location=${location}&checkin=${checkIn}&checkout=${checkOut}&adults=${number}&children=0&infants=0&pets=0&page=1&currency=KRW`,
+        `https://airbnb13.p.rapidapi.com/search-location?location=${location}&checkin=${checkIn}&checkout=${checkOut}&adults=${adults}&children=${children}&infants=0&pets=${pets}&page=1&currency=KRW`,
         getOptions
       );
       setRooms(getData.results);
@@ -149,7 +169,7 @@ const SearchLists = () => {
     }
     e.preventDefault();
     navigate(
-      `/search-lists?location=${state.location}&checkIn=${state.checkIn}&checkOut=${state.checkOut}&adults=${state.number}`
+      `/search-lists?location=${state.location}&checkIn=${state.checkIn}&checkOut=${state.checkOut}&adults=${state.adults}&children=${state.children}&pets=${state.pets}`
     );
   };
   const toggleActive = () => setLike((prev) => !prev);
@@ -204,6 +224,7 @@ const SearchLists = () => {
                 </SearchBtn>
                 <SearchBtn>
                   <span>체크아웃</span>
+
                   <input
                     type='date'
                     name='checkOut'
@@ -213,13 +234,37 @@ const SearchLists = () => {
                 </SearchBtn>
                 <SearchBtn>
                   <span>인원</span>
-                  <input
-                    type='number'
-                    name='number'
-                    onChange={handleOnChange}
-                    value={state.number}></input>
+                  <div>
+                    <div>
+                      <span>성인 : </span>
+                      <input
+                        type='number'
+                        name='adults'
+                        onChange={handleOnChange}
+                        value={state.adults}
+                      />
+                    </div>
+                    <div>
+                      <span>어린이 : </span>
+                      <input
+                        type='number'
+                        name='children'
+                        onChange={handleOnChange}
+                        value={state.children}
+                      />
+                    </div>
+                    <div>
+                      <span>반려동물 : </span>
+                      <input
+                        type='number'
+                        name='pets'
+                        onChange={handleOnChange}
+                        value={state.pets}
+                      />
+                    </div>
+                  </div>
                 </SearchBtn>
-                <SearchBtn>
+                <SearchBtn type='submit'>
                   <i class='ri-search-line'></i>
                 </SearchBtn>
               </SearchListsBox>

@@ -34,6 +34,7 @@ const GlobalStyles = createGlobalStyle`
   em, strong{
     font-style:normal;
     font-weight:normal;
+    
   }
 
   .section{
