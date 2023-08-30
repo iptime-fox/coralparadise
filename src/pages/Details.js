@@ -9,7 +9,7 @@ const Details = () => {
       <Helmet>
         <title>ColralParadise</title>
       </Helmet>
-      <Header />
+      {/* <Header /> */}
       <DetailPage />
     </div>
   );
