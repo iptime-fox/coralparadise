@@ -8,6 +8,7 @@ export const Container = styled.div`
   margin: auto;
   align-items: center;
   padding: 2rem;
+  position: relative;
   max-width: 1280px;
 
   @media (max-width: ${({ theme }) => theme.tablet}) {
@@ -17,4 +18,13 @@ export const Container = styled.div`
     margin: auto;
     padding: 0 15px;
   }
+  /* width: 100%;
+  height: auto;
+  max-width: 1280px;
+  margin: auto;
+  padding: 2rem;
+  position: relative;
+
+ 
+  } */
 `;

@@ -58,24 +58,24 @@ const Landing = () => {
       inputRef.current.focus();
       return;
     }
-    if (state.adults === '') {
-      e.preventDefault();
-      alert('검색하실 위치를 입력하세요');
-      inputRef.current.focus();
-      return;
-    }
-    if (state.children === '') {
-      e.preventDefault();
-      alert('검색하실 위치를 입력하세요');
-      inputRef.current.focus();
-      return;
-    }
-    if (state.pets === '') {
-      e.preventDefault();
-      alert('검색하실 위치를 입력하세요');
-      inputRef.current.focus();
-      return;
-    }
+    // if (state.adults === '') {
+    //   e.preventDefault();
+    //   alert('검색하실 위치를 입력하세요');
+    //   inputRef.current.focus();
+    //   return;
+    // }
+    // if (state.children === '') {
+    //   e.preventDefault();
+    //   alert('검색하실 위치를 입력하세요');
+    //   inputRef.current.focus();
+    //   return;
+    // }
+    // if (state.pets === '') {
+    //   e.preventDefault();
+    //   alert('검색하실 위치를 입력하세요');
+    //   inputRef.current.focus();
+    //   return;
+    // }
     e.preventDefault();
     navigate(
       `/search-lists?location=${state.location}&checkIn=${state.checkIn}&checkOut=${state.checkOut}&adults=${state.adults}&children=${state.children}&pets=${state.pets}`

@@ -7,7 +7,7 @@ export const LandingPage = styled.div`
 
 export const SearchBoxWrapper = styled.div`
   width: 100%;
-  height: 100vh;
+  height: auto;
   /* top: 80%;
   transform: translateY(-50%); */
   top: 15rem;

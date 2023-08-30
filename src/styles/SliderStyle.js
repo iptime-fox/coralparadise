@@ -26,10 +26,11 @@ export const SliderWrapper = styled.div`
       bottom: 0;
       background: #fff;
       width: 100%;
-      padding: 1rem;
+      padding: 0.65rem;
 
       h3 {
-        line-height: 200%;
+        font-size: 18px;
+        line-height: 100%;
         display: -webkit-box;
         text-overflow: ellipsis;
         -webkit-line-clamp: 1;
@@ -39,6 +40,8 @@ export const SliderWrapper = styled.div`
       }
 
       p {
+        font-size: 14px;
+        line-height: 150%;
         display: flex;
         flex-direction: column;
         margin-bottom: 0.5rem;
@@ -56,7 +59,9 @@ export const SliderWrapper = styled.div`
           color: ${({ theme }) => theme.colors.point};
         }
       }
-
+      a {
+        font-size: 14px;
+      }
       a:hover {
         text-decoration: underline;
       }
@@ -86,5 +91,68 @@ export const SliderWrapper = styled.div`
 
   .slick-next {
     right: -60px;
+  }
+`;
+export const BestSlider = styled(SliderWrapper)`
+  margin-top: 2.5rem;
+  overflow: hidden;
+
+  .slick-slide {
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .slick-slide > div {
+    height: 100%;
+  }
+
+  .slide-item {
+    border-radius: 0;
+    height: 100%;
+
+    .slider-text {
+      position: absolute;
+      background: transparent;
+      width: 100%;
+      height: 100%;
+
+      span {
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        right: 0;
+        top: 0;
+        background: ${({ theme }) => theme.colors.point};
+        color: #fff;
+      }
+
+      h3 {
+        text-transform: uppercase;
+        font-size: 20px;
+        color: #fff;
+        font-weight: 700;
+        font-family: 'Noto Sans KR', sans-serif;
+        letter-spacing: -1px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+
+  .slick-list {
+    overflow: visible;
+    .slick-slide {
+      padding: 0.5rem;
+      height: 450px;
+      position: relative;
+    }
   }
 `;
