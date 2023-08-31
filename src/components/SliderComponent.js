@@ -9,9 +9,6 @@ import { fetchData, getOptions } from '../utils/fetchData';
 import { Link } from 'react-router-dom';
 import Button from './Button';
 import { styled } from 'styled-components';
-import { bestList } from '../utils/bestList';
-import SliderImage from '../assets/slick.jpeg';
-import { ClipLoader } from 'react-spinners';
 
 const CustomSearchWrapper = styled.div`
   text-align: center;
@@ -40,16 +37,44 @@ const CustomSearchWrapper = styled.div`
 const SliderComponent = ({ mode }) => {
   let settings = {};
   const [slider, setSlider] = useState([]);
+  const [locationsFromJson, setLocationsFromJson] = useState([]);
+  const [currentLocation, setCurrentLocation] = useState(null);
+  const getSearchData = async () => {
+    const getData = await fetchData(
+      'https://airbnb13.p.rapidapi.com/search-location?location=Paris&checkin=2023-09-16&checkout=2023-09-17&adults=1&children=0&infants=0&pets=0&page=1&currency=USD',
+      getOptions
+    );
+    setSlider(getData.results);
+  };
   useEffect(() => {
-    const getSearchData = async () => {
-      const getData = await fetchData(
-        'https://airbnb13.p.rapidapi.com/search-location?location=Paris&checkin=2023-09-16&checkout=2023-09-17&adults=1&children=0&infants=0&pets=0&page=1&currency=USD',
-        getOptions
-      );
-      setSlider(getData.results);
-    };
     getSearchData();
   }, []);
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        setCurrentLocation({ lat: latitude, lng: longitude });
+        const ne_lat = latitude + 0.01;
+        const ne_lng = longitude + 0.01;
+        const sw_lat = latitude - 0.01;
+        const sw_lng = longitude - 0.01;
+        getMyLocaData(ne_lat, ne_lng, sw_lat, sw_lng);
+      },
+      (error) => {
+        console.error('Error getting current location:', error);
+      }
+    );
+
+    const getMyLocaData = async (nelat, nelng, swlat, swlng) => {
+      const getData = await fetchData(
+        `https://airbnb13.p.rapidapi.com/search-location?ne_lat=${nelat}&ne_lng=${nelng}&sw_lat=${swlat}&sw_lng=${swlng}&checkin=2023-09-16&checkout=2023-09-17&adults=1&children=0&infants=0&pets=0&page=1`,
+        getOptions
+      );
+
+      setLocationsFromJson(getData.results);
+    };
+  }, []);
+
   if (mode === 'custom') {
     settings = {
       arrows: true,
@@ -82,19 +107,19 @@ const SliderComponent = ({ mode }) => {
                 <br />
                 <select>
                   <option key='America' value='America'>
-                    🇺🇸 미주/캐나다/대양주로
+                    🇺🇸 미국으로
                   </option>
                   <option key='SouthEastAsia' value='SouthEastAsia'>
                     🏖️ 동남아로
                   </option>
                   <option key='Asia' value='Asia'>
-                    🏙️ 일본/중국/대만/홍콩으로
+                    🏙️ 일본으로
                   </option>
                   <option key='Europe' value='Europe'>
                     🇪🇺 유럽으로
                   </option>
                   <option key='Guam' value='Guam'>
-                    🏝️ 괌/사이판으로
+                    🏝️ 괌으로
                   </option>
                 </select>
                 떠나고 싶어요
@@ -151,7 +176,7 @@ const SliderComponent = ({ mode }) => {
       <div className='section'>
         <BestSlider>
           <Slider {...settings} className='slider-wrapper'>
-            {slider.map((data) => (
+            {locationsFromJson.map((data) => (
               <div className='slide-item' key=''>
                 <img src={data.images[0]} alt='' />
 

@@ -21,5 +21,6 @@ export const getFormattedTomorrowDate = (targetDate) => {
   if (date < 10) {
     date = `0${date}`;
   }
+
   return `${year}-${month}-${date}`;
 };

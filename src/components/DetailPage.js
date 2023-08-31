@@ -2,8 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Container } from '../styles/ContainerStyle';
 import { fetchData, getOptions } from '../utils/fetchData';
 import { useLocation } from 'react-router-dom';
+import Header from './Header';
+import { ClipLoader } from 'react-spinners';
+import DetailImages from './DetailImages';
 
 export const DetailPage = () => {
+  const [loading, setLoading] = useState(true);
   const [details, setDetails] = useState([]);
   // const [dataId, setDataId] = useState([]);
   const loca = useLocation();
@@ -15,26 +19,49 @@ export const DetailPage = () => {
   const children = new URLSearchParams(loca.search).get('children');
   const pets = new URLSearchParams(loca.search).get('pets');
   const dataId = new URLSearchParams(loca.search).get('id');
+  const getSearchData = async () => {
+    const getData = await fetchData(
+      `https://airbnb13.p.rapidapi.com/search-location?location=${location}&checkin=${checkIn}&checkout=${checkOut}&adults=${adults}&children=${children}&infants=0&pets=${pets}&page=1&currency=KRW`,
+      getOptions
+    );
+    setDetails(getData.results);
+    setLoading(false);
+    // console.log(getData.results.id);
+    // setLoading(false);
+  };
   useEffect(() => {
-    const getSearchData = async () => {
-      const getData = await fetchData(
-        `https://airbnb13.p.rapidapi.com/search-location?location=${location}&checkin=${checkIn}&checkout=${checkOut}&adults=${adults}&children=${children}&infants=0&pets=${pets}&page=1&currency=KRW`,
-        getOptions
-      );
-      setDetails(getData.results);
-      // console.log(getData.results.id);
-      // setLoading(false);
-    };
     getSearchData();
   }, []);
-  details.map((data) => {
-    if (data.id === dataId) {
-      return (
-        <>
-          <h1>있음</h1>
-        </>
-      );
-      // console.log('있음');
-    }
-  });
+  return (
+    <>
+      <Header />
+      {loading ? (
+        <div
+          style={{
+            position: 'fixed',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+          }}>
+          <ClipLoader
+            color='#ff6666'
+            height={15}
+            width={5}
+            radius={2}
+            margin={2}
+          />
+        </div>
+      ) : (
+        <Container>
+          {details
+            .filter((room) => room.id === dataId)
+            .map((room) => (
+              <div className='section'>
+                <DetailImages roomImages={room.images} />
+              </div>
+            ))}
+        </Container>
+      )}
+    </>
+  );
 };

@@ -9,7 +9,6 @@ const Details = () => {
       <Helmet>
         <title>ColralParadise</title>
       </Helmet>
-      {/* <Header /> */}
       <DetailPage />
     </div>
   );
