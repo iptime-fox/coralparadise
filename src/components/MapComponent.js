@@ -1,4 +1,9 @@
-import { GoogleMap, Marker, useLoadScript } from '@react-google-maps/api';
+import {
+  GoogleMap,
+  InfoWindow,
+  Marker,
+  useLoadScript,
+} from '@react-google-maps/api';
 import React, { useEffect, useState } from 'react';
 import MarkerIcon from '../assets/marker.png';
 import { Container } from '../styles/ContainerStyle';
@@ -21,7 +26,13 @@ const MapComponent = () => {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_MAP_KEY,
   });
-
+  const [activeMarker, setActiveMarker] = useState(null);
+  const handleActiveMarker = (marker) => {
+    if (marker === activeMarker) {
+      return;
+    }
+    setActiveMarker(marker);
+  };
   useEffect(() => {
     // Get the user's current location using geolocation
     navigator.geolocation.getCurrentPosition(
@@ -70,7 +81,8 @@ const MapComponent = () => {
           }}
           center={currentLocation}
           zoom={14}
-          onLoad={onMapLoad}>
+          onLoad={onMapLoad}
+          onClick={() => setActiveMarker(null)}>
           {currentLocation && (
             <Marker
               position={{ lat: currentLocation.lat, lng: currentLocation.lng }}
@@ -82,16 +94,20 @@ const MapComponent = () => {
           )}
 
           {locationsFromJson.map((location, index) => (
-            <Link to={`/details?id=${location.id}`}>
-              <Marker
-                key={index}
-                icon={{
-                  url: MarkerIcon,
-                  scaledSize: new window.google.maps.Size(30, 40),
-                }}
-                position={{ lat: location.lat, lng: location.lng }}
-              />
-            </Link>
+            <Marker
+              key={index}
+              icon={{
+                url: MarkerIcon,
+                scaledSize: new window.google.maps.Size(30, 40),
+              }}
+              position={{ lat: location.lat, lng: location.lng }}
+              onClick={() => handleActiveMarker(location)}>
+              {activeMarker === location ? (
+                <InfoWindow onCloseClick={() => setActiveMarker(null)}>
+                  <div>{location.name}</div>
+                </InfoWindow>
+              ) : null}
+            </Marker>
           ))}
         </GoogleMap>
       </Container>

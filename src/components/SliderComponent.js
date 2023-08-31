@@ -178,7 +178,9 @@ const SliderComponent = ({ mode }) => {
           <Slider {...settings} className='slider-wrapper'>
             {locationsFromJson.map((data) => (
               <div className='slide-item' key=''>
-                <img src={data.images[0]} alt='' />
+                <Link to={`/details?id=${data.id}`}>
+                  <img src={data.images[0]} alt='' />
+                </Link>
 
                 <div className='slider-text'>
                   <span className='label'>{1}위</span>
