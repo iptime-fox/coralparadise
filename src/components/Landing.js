@@ -83,7 +83,7 @@ const Landing = () => {
   };
   return (
     <>
-      <Container style={{ paddingTop: '8rem' }}>
+      <Container style={{ paddingTop: '3rem' }}>
         <LandingPage>
           <SearchBoxWrapper>
             <SearchBox>

@@ -91,7 +91,7 @@ const SearchResults = () => {
         </div>
       ) : (
         <>
-          <Container style={{ paddingTop: '8rem' }}>
+          <Container>
             <SearchListsBoxWrapper>
               <SearchListsBox onSubmit={onSubmit}>
                 <SearchBtn>

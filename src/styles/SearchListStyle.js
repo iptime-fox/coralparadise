@@ -1,6 +1,10 @@
 import { styled } from 'styled-components';
 
-export const SearchListsBoxWrapper = styled.div``;
+export const SearchListsBoxWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+`;
 
 export const SearchListsBox = styled.form`
   padding: 0.5rem 2rem;
