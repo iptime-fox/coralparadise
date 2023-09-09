@@ -5,6 +5,11 @@ import { useLocation } from 'react-router-dom';
 import Header from './Header';
 import { ClipLoader } from 'react-spinners';
 import DetailImages from './DetailImages';
+import { styled } from 'styled-components';
+
+const Title = styled.div`
+  font-size: 20px;
+`;
 
 export const DetailPage = () => {
   const [loading, setLoading] = useState(true);
@@ -60,6 +65,9 @@ export const DetailPage = () => {
                 <DetailImages roomImages={room.images} />
               </div>
             ))}
+          <Title>
+            <h4></h4>
+          </Title>
         </Container>
       )}
     </>
