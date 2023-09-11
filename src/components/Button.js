@@ -1,13 +1,29 @@
 import React from 'react';
 import { CommonBtn, SubPointBtn, SubWhiteBtn } from '../styles/ButtonStyle';
 
-const Button = ({ text, mode }) => {
+const Button = ({ text, mode, onClick }) => {
   if (mode === 'hero') {
     return <CommonBtn>{text}</CommonBtn>;
   } else if (mode === 'sub-white') {
-    return <SubWhiteBtn>{text}</SubWhiteBtn>;
+    return (
+      <SubWhiteBtn
+        onClick={(e) => {
+          e.preventDefault();
+          onClick();
+        }}>
+        {text}
+      </SubWhiteBtn>
+    );
   } else if (mode === 'sub-point') {
-    return <SubPointBtn>{text}</SubPointBtn>;
+    return (
+      <SubPointBtn
+        onClick={(e) => {
+          e.preventDefault();
+          onClick();
+        }}>
+        {text}
+      </SubPointBtn>
+    );
   }
 };
 

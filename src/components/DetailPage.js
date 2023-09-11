@@ -9,6 +9,7 @@ import { styled } from 'styled-components';
 import DetailMap from './DetailMap';
 import { PiBathtubLight } from 'react-icons/pi';
 import { LiaBedSolid } from 'react-icons/lia';
+import SearchBoxes from './SearchBox';
 
 const Details = styled.div`
   h4 {
@@ -18,14 +19,14 @@ const Details = styled.div`
 `;
 
 const TitleWrapper = styled.div`
-  width: 50%;
+  /* width: 50%; */
   display: flex;
   justify-content: space-between;
   margin-bottom: 2rem;
 `;
 
 const Title = styled.div`
-  width: 70%;
+  /* width: 70%; */
   h3 {
     font-size: 25px;
     font-weight: 500;
@@ -55,7 +56,8 @@ const RoomInfoWrapper = styled.div`
 
 const RoomInfoBoxWrapper = styled.div`
   display: flex;
-  width: 50%;
+  width: 100%;
+  justify-content: flex-start;
   padding: 2rem;
   column-gap: 2rem;
   padding-left: 0;
@@ -70,6 +72,23 @@ const RoomInfo = styled.div`
 `;
 
 const MapWrapper = styled.div``;
+
+const LeftDetails = styled.div`
+  width: 100%;
+`;
+
+const DetailWrapper = styled.div`
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  width: 100%;
+  /* column-gap: 3rem; */
+  div:nth-child(2) {
+    position: static;
+    transform: none;
+    justify-content: flex-end;
+  }
+`;
 
 export const DetailPage = () => {
   const [loading, setLoading] = useState(true);
@@ -121,46 +140,54 @@ export const DetailPage = () => {
           {details
             .filter((room) => room.id === dataId)
             .map((room) => (
-              <Details>
-                <div className='section'>
-                  <DetailImages roomImages={room.images} />
-                </div>
-                <TitleWrapper>
-                  <Title>
-                    <h3>{room.name}</h3>
-                    <b>
-                      {room.city} ★ {room.rating}
-                    </b>
-                  </Title>
-                  <HostWrapper>
-                    <HostImages src={room.hostThumbnail}></HostImages>
-                  </HostWrapper>
-                </TitleWrapper>
-                <InfoWrapper>
-                  <h4>숙소 정보</h4>
-                  <p>{room.type}</p>
-                </InfoWrapper>
-                <RoomInfoWrapper>
-                  <h4>숙소 시설</h4>
-                  <RoomInfoBoxWrapper>
-                    <RoomInfo>
-                      <PiBathtubLight size={50} />
+              <>
+                <Details>
+                  <div className='section'>
+                    <DetailImages roomImages={room.images} />
+                  </div>
+                  <DetailWrapper>
+                    <LeftDetails>
+                      <TitleWrapper>
+                        <Title>
+                          <h3>{room.name}</h3>
+                          <b>
+                            {room.city} ★ {room.rating}
+                          </b>
+                        </Title>
+                        <HostWrapper>
+                          <HostImages src={room.hostThumbnail}></HostImages>
+                        </HostWrapper>
+                      </TitleWrapper>
+                      <InfoWrapper>
+                        <h4>숙소 정보</h4>
+                        <p>{room.type}</p>
+                      </InfoWrapper>
+                      <RoomInfoWrapper>
+                        <h4>숙소 시설</h4>
+                        <RoomInfoBoxWrapper
+                          style={{ justifyContent: 'flex-start' }}>
+                          <RoomInfo>
+                            <PiBathtubLight size={50} />
 
-                      <p>욕실 {room.bathrooms}개</p>
-                    </RoomInfo>
-                    <RoomInfo>
-                      <LiaBedSolid size={50} />
-                      <p>
-                        침실 {room.bedrooms}개, 침대 {room.beds}개
-                      </p>
-                    </RoomInfo>
-                  </RoomInfoBoxWrapper>
-                </RoomInfoWrapper>
-                <MapWrapper>
-                  <h4>호스팅 지역</h4>
-                  <DetailMap lati={room.lat} long={room.lng} />
-                </MapWrapper>
-              </Details>
+                            <p>욕실 {room.bathrooms}개</p>
+                          </RoomInfo>
+                          <RoomInfo>
+                            <LiaBedSolid size={50} />
+                            <p>
+                              침실 {room.bedrooms}개, 침대 {room.beds}개
+                            </p>
+                          </RoomInfo>
+                        </RoomInfoBoxWrapper>
+                      </RoomInfoWrapper>
+                    </LeftDetails>
+                    <SearchBoxes />
+                  </DetailWrapper>
+                  <MapWrapper>
+                    <h4>호스팅 지역</h4>
+                    <DetailMap lati={room.lat} long={room.lng} />
+                  </MapWrapper>
+                </Details>
+              </>
             ))}
         </Container>
       )}

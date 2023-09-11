@@ -2,17 +2,22 @@ import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { RiArrowLeftSLine, RiArrowRightSLine } from 'react-icons/ri';
-import { BestSlider, SliderWrapper } from '../styles/SliderStyle';
+import {
+  RiArrowLeftSLine,
+  RiArrowRightSLine,
+  RiStarSFill,
+} from 'react-icons/ri';
+import { BestSlider, SliderTitle, SliderWrapper } from '../styles/SliderStyle';
 import { Container } from '../styles/ContainerStyle';
 import { fetchData, getOptions } from '../utils/fetchData';
 import { Link } from 'react-router-dom';
 import Button from './Button';
 import { styled } from 'styled-components';
+import { getFormattedTodayDate, getFormattedTomorrowDate } from '../utils/util';
 
 const CustomSearchWrapper = styled.div`
   text-align: center;
-
+  margin-top: 2rem;
   h3 {
     font-size: 1.8rem;
     font-weight: 400;
@@ -28,20 +33,65 @@ const CustomSearchWrapper = styled.div`
 
   .buttons {
     width: 50%;
-    display: flex;
     margin: auto;
-    column-gap: 1rem;
-    margin-top: 2.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
 `;
 const SliderComponent = ({ mode }) => {
   let settings = {};
   const [slider, setSlider] = useState([]);
-  const [locationsFromJson, setLocationsFromJson] = useState([]);
-  const [currentLocation, setCurrentLocation] = useState(null);
+  const [options, setOptions] = useState({
+    loca: 'USA',
+    adults: '1',
+    children: '1',
+    pets: '0',
+    checkIn: getFormattedTodayDate(new Date()),
+    checkOut: getFormattedTomorrowDate(new Date()),
+  });
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+    if (value === 'child') {
+      setOptions({
+        ...options,
+        adults: '1',
+        children: '1',
+        pets: '0',
+      });
+    } else if (value === 'alone') {
+      setOptions({
+        ...options,
+        adults: '1',
+        children: '0',
+        pets: '0',
+      });
+    } else if (value === 'couple') {
+      setOptions({
+        ...options,
+        adults: '2',
+        children: '0',
+        pets: '0',
+      });
+    } else if (value === 'pet') {
+      setOptions({
+        ...options,
+        adults: '1',
+        children: '0',
+        pets: '1',
+      });
+    } else {
+      setOptions({
+        ...options,
+        [name]: value,
+      });
+    }
+  };
+  const handleOnClick = () => {
+    getSearchData();
+  };
   const getSearchData = async () => {
     const getData = await fetchData(
-      'https://airbnb13.p.rapidapi.com/search-location?location=Paris&checkin=2023-11-16&checkout=2023-11-17&adults=1&children=0&infants=0&pets=0&page=1&currency=USD',
+      `https://airbnb13.p.rapidapi.com/search-location?location=${options.loca}&checkin=${options.checkIn}&checkout=${options.checkOut}&adults=${options.adults}&children=${options.children}&infants=0&pets=${options.pets}&page=1&currency=KRW`,
       getOptions
     );
     setSlider(getData.results);
@@ -49,6 +99,8 @@ const SliderComponent = ({ mode }) => {
   useEffect(() => {
     getSearchData();
   }, []);
+  const [locationsFromJson, setLocationsFromJson] = useState([]);
+  const [currentLocation, setCurrentLocation] = useState(null);
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -90,75 +142,92 @@ const SliderComponent = ({ mode }) => {
       <div>
         <CustomSearchWrapper id='custom-search' className='section'>
           <Container>
-            <div className='text-wrapper'>
+            <form className='text-wrapper'>
               <h3>
                 나는
-                <select>
+                <select
+                  onChange={handleOnChange}
+                  name='guest'
+                  value={options.guest}>
                   <option key='child' value='child'>
                     👶 아이와 함께
                   </option>
-                  <option key='couple' value='couple'>
-                    👩‍❤️‍👨 연인과 함께
+                  <option key='alone' value='alone'>
+                    👤 나 홀로
                   </option>
-                  <option key='dog' value='dog'>
+                  <option key='couple' value='couple'>
+                    👩‍❤️‍👨연인과 함께
+                  </option>
+                  <option key='pet' value='pet'>
                     🐶 반려동물과 함께
                   </option>
                 </select>
                 <br />
-                <select>
-                  <option key='America' value='America'>
+                <select
+                  onChange={handleOnChange}
+                  name='loca'
+                  value={options.loca}>
+                  <option key='USA' value='USA'>
                     🇺🇸 미국으로
                   </option>
                   <option key='SouthEastAsia' value='SouthEastAsia'>
                     🏖️ 동남아로
                   </option>
-                  <option key='Asia' value='Asia'>
+                  <option key='Japan' value='Japan'>
                     🏙️ 일본으로
                   </option>
                   <option key='Europe' value='Europe'>
                     🇪🇺 유럽으로
                   </option>
-                  <option key='Guam' value='Guam'>
-                    🏝️ 괌으로
+                  <option key='Hawaii' value='Hawaii'>
+                    🏝️ 하와이로
                   </option>
                 </select>
                 떠나고 싶어요
               </h3>
               <div className='buttons'>
-                <Button text='최신순' mode='sub-white' />
-                <Button text='리뷰순' mode='sub-point' />
+                {/* <Button text='최신순' mode='sub-white' /> */}
+                <Button
+                  text='🔍 내 취향 숙소 찾기'
+                  mode='sub-point'
+                  onClick={handleOnClick}
+                />
               </div>
-            </div>
+            </form>
+          </Container>
+          <Container>
+            <SliderWrapper>
+              <Slider {...settings} className='slider-wrapper'>
+                {slider.map((item) => (
+                  <div className='slide-item' key={item.id}>
+                    <div className='slider-img'>
+                      <img src={item.images[0]} alt='' />
+                    </div>
+                    <div className='slider-text'>
+                      <h3>{item.name}</h3>
+                      <p>
+                        <em>{item.address}</em>
+                        <span>
+                          {/* {Array.from({ length: Math.round(item.rating) }).map(
+                        (_, index) => (
+                          <RiStarSFill key={index} />
+                        )
+                      )} */}
+                          <RiStarSFill />
+                          {item.rating}
+                        </span>
+                      </p>
+                      <Link
+                        to={`/details?location=${options.loca}&checkIn=${options.checkIn}&checkOut=${options.checkOut}&adults=${options.adults}&children=${options.children}&pets=${options.pets}&id=${item.id}`}>
+                        자세히 보기
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+              </Slider>
+            </SliderWrapper>
           </Container>
         </CustomSearchWrapper>
-
-        <Container>
-          <SliderWrapper>
-            <Slider {...settings} className='slider-wrapper'>
-              {slider.map((data) => (
-                <div className='slide-item'>
-                  <img src={data.images[0]} alt='' />
-                  <div className='slider-text'>
-                    <h3>{data.name}</h3>
-                    <p>
-                      <em>{data.address}</em>
-                      <em>★ {data.rating}</em>
-
-                      <span>
-                        {/* {Array.from({ length: {data.rating} }).map((_, index) => (
-                        <RiStarSFill key={index} />
-                      ))} */}
-                      </span>
-                    </p>
-                    <Link to={`/details/${data.id}`}>
-                      <strong>자세히 보기</strong>
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </Slider>
-          </SliderWrapper>
-        </Container>
       </div>
     );
   } else if (mode === 'best') {
@@ -174,6 +243,7 @@ const SliderComponent = ({ mode }) => {
     // );
     return (
       <div className='section'>
+        <SliderTitle>📍 내 주변 숙소찾기</SliderTitle>
         <BestSlider>
           <Slider {...settings} className='slider-wrapper'>
             {locationsFromJson.map((data) => (

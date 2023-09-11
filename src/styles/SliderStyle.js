@@ -93,6 +93,13 @@ export const SliderWrapper = styled.div`
     right: -60px;
   }
 `;
+
+export const SliderTitle = styled.h3`
+  text-align: center;
+  font-size: 30px;
+  font-weight: 500;
+`;
+
 export const BestSlider = styled(SliderWrapper)`
   margin-top: 2.5rem;
   overflow: hidden;

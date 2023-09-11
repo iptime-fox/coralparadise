@@ -2,19 +2,21 @@ import { styled } from 'styled-components';
 
 export const LandingPage = styled.div`
   width: 100%;
-  display: flex;
+  /* display: flex; */
+  position: relative;
 `;
 
 export const SearchBoxWrapper = styled.div`
   width: 100%;
   height: auto;
-  /* top: 80%;
-  transform: translateY(-50%); */
+  top: 50%;
+  transform: translateY(-50%);
   top: 15rem;
   display: flex;
   justify-content: left;
   position: absolute;
   z-index: 10;
+  /* flex-direction: column; */
 `;
 
 export const SearchBox = styled.div`
@@ -30,7 +32,7 @@ export const SearchBox = styled.div`
 export const MainImgWrapper = styled.div`
   width: 100%;
   display: flex;
-  justify-content: right;
+  justify-content: flex-end;
 `;
 export const MainImg = styled.img`
   width: 75%;
