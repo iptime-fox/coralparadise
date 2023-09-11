@@ -41,7 +41,7 @@ const SliderComponent = ({ mode }) => {
   const [currentLocation, setCurrentLocation] = useState(null);
   const getSearchData = async () => {
     const getData = await fetchData(
-      'https://airbnb13.p.rapidapi.com/search-location?location=Paris&checkin=2023-09-16&checkout=2023-09-17&adults=1&children=0&infants=0&pets=0&page=1&currency=USD',
+      'https://airbnb13.p.rapidapi.com/search-location?location=Paris&checkin=2023-11-16&checkout=2023-11-17&adults=1&children=0&infants=0&pets=0&page=1&currency=USD',
       getOptions
     );
     setSlider(getData.results);
@@ -67,7 +67,7 @@ const SliderComponent = ({ mode }) => {
 
     const getMyLocaData = async (nelat, nelng, swlat, swlng) => {
       const getData = await fetchData(
-        `https://airbnb13.p.rapidapi.com/search-location?ne_lat=${nelat}&ne_lng=${nelng}&sw_lat=${swlat}&sw_lng=${swlng}&checkin=2023-09-16&checkout=2023-09-17&adults=1&children=0&infants=0&pets=0&page=1`,
+        `https://airbnb13.p.rapidapi.com/search-location?ne_lat=${nelat}&ne_lng=${nelng}&sw_lat=${swlat}&sw_lng=${swlng}&checkin=2023-11-16&checkout=2023-11-17&adults=1&children=0&infants=0&pets=0&page=1`,
         getOptions
       );
 

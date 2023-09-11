@@ -7,24 +7,67 @@ import { ClipLoader } from 'react-spinners';
 import DetailImages from './DetailImages';
 import { styled } from 'styled-components';
 import DetailMap from './DetailMap';
+import { PiBathtubLight } from 'react-icons/pi';
+import { LiaBedSolid } from 'react-icons/lia';
 
-const Title = styled.div`
-  font-size: 20px;
+const Details = styled.div`
+  h4 {
+    font-size: 25px;
+    font-weight: 500;
+  }
 `;
 
-const TitleWrapper = styled.div``;
+const TitleWrapper = styled.div`
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+`;
+
+const Title = styled.div`
+  width: 70%;
+  h3 {
+    font-size: 25px;
+    font-weight: 500;
+  }
+  b {
+    font-size: 18px;
+    font-weight: 300;
+    color: #777;
+  }
+`;
 
 const HostWrapper = styled.div``;
 
-const HostImages = styled.img``;
+const HostImages = styled.img`
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+`;
 
-const InfoWrapper = styled.div``;
+const InfoWrapper = styled.div`
+  margin-bottom: 2rem;
+`;
 
-const RoomInfoWrapper = styled.div``;
+const RoomInfoWrapper = styled.div`
+  margin-bottom: 2rem;
+`;
 
-const RoomInfoBoxWrapper = styled.div``;
+const RoomInfoBoxWrapper = styled.div`
+  display: flex;
+  width: 50%;
+  padding: 2rem;
+  column-gap: 2rem;
+  padding-left: 0;
+  text-align: center;
+`;
 
-const RoomInfo = styled.div``;
+const RoomInfo = styled.div`
+  width: 35%;
+  border: 1px solid black;
+  border-radius: 1rem;
+  padding: 2rem;
+`;
 
 const MapWrapper = styled.div``;
 
@@ -78,14 +121,16 @@ export const DetailPage = () => {
           {details
             .filter((room) => room.id === dataId)
             .map((room) => (
-              <>
+              <Details>
                 <div className='section'>
                   <DetailImages roomImages={room.images} />
                 </div>
                 <TitleWrapper>
                   <Title>
-                    <h4>{room.name}</h4>
-                    <b>{room.city}</b> <em>★{room.rating}</em>
+                    <h3>{room.name}</h3>
+                    <b>
+                      {room.city} ★ {room.rating}
+                    </b>
                   </Title>
                   <HostWrapper>
                     <HostImages src={room.hostThumbnail}></HostImages>
@@ -98,9 +143,16 @@ export const DetailPage = () => {
                 <RoomInfoWrapper>
                   <h4>숙소 시설</h4>
                   <RoomInfoBoxWrapper>
-                    <RoomInfo>욕실 {room.bathrooms}개</RoomInfo>
                     <RoomInfo>
-                      침실 {room.bedrooms}개 침대 {room.beds}개
+                      <PiBathtubLight size={50} />
+
+                      <p>욕실 {room.bathrooms}개</p>
+                    </RoomInfo>
+                    <RoomInfo>
+                      <LiaBedSolid size={50} />
+                      <p>
+                        침실 {room.bedrooms}개, 침대 {room.beds}개
+                      </p>
                     </RoomInfo>
                   </RoomInfoBoxWrapper>
                 </RoomInfoWrapper>
@@ -108,7 +160,7 @@ export const DetailPage = () => {
                   <h4>호스팅 지역</h4>
                   <DetailMap lati={room.lat} long={room.lng} />
                 </MapWrapper>
-              </>
+              </Details>
             ))}
         </Container>
       )}
