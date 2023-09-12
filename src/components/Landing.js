@@ -23,12 +23,27 @@ import { getFormattedTodayDate, getFormattedTomorrowDate } from '../utils/util';
 import SearchBoxes from './SearchBox';
 
 const Landing = () => {
+  const [main, setmMain] = useState([]);
+  useEffect(() => {
+    const getMainData = async () => {
+      const getData = await fetchData(
+        `https://airbnb13.p.rapidapi.com/search-location?location=korea&checkin=2023-12-01&checkout=2023-12-02&adults=$1&currency=KRW`,
+        getOptions
+      );
+      setmMain(getData.results);
+      // setmMain[Math.floor(Math.random() * setmMain.length)]
+    };
+    getMainData();
+  }, []);
   return (
     <>
       <Container style={{ paddingTop: '3rem' }}>
         <LandingPage>
           <SearchBoxes />
           <MainImgWrapper>
+            {/* {main.Math.f((data) => (
+              <MainImg src={data.images[0]}></MainImg>
+            ))} */}
             <MainImg src={mainImg}></MainImg>
           </MainImgWrapper>
         </LandingPage>

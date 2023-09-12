@@ -118,7 +118,7 @@ export const BestSlider = styled(SliderWrapper)`
 
   .slide-item {
     border-radius: 0;
-    height: 100%;
+    /* height: 100%; */
 
     .slider-text {
       position: absolute;

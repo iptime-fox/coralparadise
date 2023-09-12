@@ -85,7 +85,7 @@ const SearchBoxes = () => {
     <SearchBoxWrapper>
       <SearchBox>
         <TitleWrapper>
-          <h4>한국의 휴가 임대 시설</h4>
+          <h4>휴가 임대 시설</h4>
           <p>CoralParadise에서 독특한 숙소를 예약하세요.</p>
         </TitleWrapper>
         <form onSubmit={onSubmit}>

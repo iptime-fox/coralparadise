@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -39,6 +39,15 @@ const CustomSearchWrapper = styled.div`
   }
 `;
 const SliderComponent = ({ mode }) => {
+  const [slideHeight, setSlideHeight] = useState(null);
+  const slideItemRef = useRef(null);
+  const setSlideItemHeight = () => {
+    if (slideItemRef.current) {
+      const slideWidth = slideItemRef.current.offsetWidth;
+      setSlideHeight(slideWidth);
+      // console.log(slideWidth);
+    }
+  };
   let settings = {};
   const [slider, setSlider] = useState([]);
   const [options, setOptions] = useState({
@@ -99,6 +108,15 @@ const SliderComponent = ({ mode }) => {
   useEffect(() => {
     getSearchData();
   }, []);
+  useEffect(() => {
+    setSlideItemHeight(); // Set initial height
+    window.addEventListener('resize', setSlideItemHeight);
+
+    // Clean up the event listener when component unmounts
+    return () => {
+      window.removeEventListener('resize', setSlideItemHeight);
+    };
+  }, []);
   const [locationsFromJson, setLocationsFromJson] = useState([]);
   const [currentLocation, setCurrentLocation] = useState(null);
   useEffect(() => {
@@ -136,6 +154,29 @@ const SliderComponent = ({ mode }) => {
       slidesToScroll: 1,
       prevArrow: <RiArrowLeftSLine />,
       nextArrow: <RiArrowRightSLine />,
+      responsive: [
+        {
+          breakpoint: 1280,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
+          },
+        },
+        {
+          breakpoint: 890,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+          },
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+          },
+        },
+      ],
     };
 
     return (
@@ -235,29 +276,60 @@ const SliderComponent = ({ mode }) => {
       arrows: false,
       dots: false,
       infinite: true,
-      slidesToShow: 3,
+      slidesToShow: 4,
       slidesToScroll: 1,
+      responsive: [
+        {
+          breakpoint: 1280,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
+          },
+        },
+        {
+          breakpoint: 890,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+          },
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+          },
+        },
+      ],
     };
-    // const sortedBestList = bestList.sort(
-    //   (a, b) => b.star - a.star || a.id - b.id
-    // );
+
     return (
       <div className='section'>
         <SliderTitle>📍 내 주변 숙소찾기</SliderTitle>
         <BestSlider>
           <Slider {...settings} className='slider-wrapper'>
-            {locationsFromJson.map((data) => (
-              <div className='slide-item' key=''>
-                <Link to={`/details?id=${data.id}`}>
-                  <img src={data.images[0]} alt='' />
-                </Link>
+            {[...locationsFromJson]
+              .sort((a, b) => b.rating - a.rating)
+              .map(({ name, images, id }, idx) => (
+                <div className='slide-item' key={idx} ref={slideItemRef}>
+                  <img src={images[0]} alt='' />
 
-                <div className='slider-text'>
-                  <span className='label'>{1}위</span>
-                  <h3>{data.city}</h3>
+                  <div className='slider-text'>
+                    <span className='label'>{idx + 1}위</span>
+                    <Link
+                      to={`details?ne_lat=${
+                        currentLocation.lat + 0.01
+                      }&ne_lng=${currentLocation.lng + 0.01}&sw_lat=${
+                        currentLocation.lat - 0.01
+                      }&sw_lng=${
+                        currentLocation.lng - 0.01
+                      }&checkin=2023-11-16&checkout=2023-11-17&adults=1&id=${id}`}>
+                      <h3>{name}</h3>
+                    </Link>
+                  </div>
+                  <style>{`.slide-item { height: ${slideHeight}px; }`}</style>
                 </div>
-              </div>
-            ))}
+              ))}
           </Slider>
         </BestSlider>
       </div>

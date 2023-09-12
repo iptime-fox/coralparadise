@@ -103,15 +103,26 @@ export const DetailPage = () => {
   const children = new URLSearchParams(loca.search).get('children');
   const pets = new URLSearchParams(loca.search).get('pets');
   const dataId = new URLSearchParams(loca.search).get('id');
+  const nelat = new URLSearchParams(loca.search).get('ne_lat');
+  const nelng = new URLSearchParams(loca.search).get('ne_lng');
+  const swlat = new URLSearchParams(loca.search).get('sw_lat');
+  const swlng = new URLSearchParams(loca.search).get('sw_lng');
+
   const getSearchData = async () => {
+    // if (nelat) {
+    //   const getData = await fetchData(
+    //     `https://airbnb13.p.rapidapi.com/search-location?ne_lat=${nelat}&ne_lng=${nelng}&sw_lat=${swlat}&sw_lng=${swlng}&checkin=2023-11-16&checkout=2023-11-17&adults=1&children=0&infants=0&pets=0&page=1`,
+    //     getOptions
+    //   );
+    // } else {
     const getData = await fetchData(
       `https://airbnb13.p.rapidapi.com/search-location?location=${location}&checkin=${checkIn}&checkout=${checkOut}&adults=${adults}&children=${children}&infants=0&pets=${pets}&page=1&currency=KRW`,
       getOptions
     );
+    // }
+
     setDetails(getData.results);
     setLoading(false);
-    // console.log(getData.results.id);
-    // setLoading(false);
   };
   useEffect(() => {
     getSearchData();
