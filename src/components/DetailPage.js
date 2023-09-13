@@ -10,6 +10,7 @@ import DetailMap from './DetailMap';
 import { PiBathtubLight } from 'react-icons/pi';
 import { LiaBedSolid } from 'react-icons/lia';
 import SearchBoxes from './SearchBox';
+import { getFormattedTodayDate, getFormattedTomorrowDate } from '../utils/util';
 
 const Details = styled.div`
   h4 {
@@ -109,18 +110,14 @@ export const DetailPage = () => {
   const swlng = new URLSearchParams(loca.search).get('sw_lng');
 
   const getSearchData = async () => {
-    // if (nelat) {
-    //   const getData = await fetchData(
-    //     `https://airbnb13.p.rapidapi.com/search-location?ne_lat=${nelat}&ne_lng=${nelng}&sw_lat=${swlat}&sw_lng=${swlng}&checkin=2023-11-16&checkout=2023-11-17&adults=1&children=0&infants=0&pets=0&page=1`,
-    //     getOptions
-    //   );
-    // } else {
-    const getData = await fetchData(
-      `https://airbnb13.p.rapidapi.com/search-location?location=${location}&checkin=${checkIn}&checkout=${checkOut}&adults=${adults}&children=${children}&infants=0&pets=${pets}&page=1&currency=KRW`,
-      getOptions
-    );
-    // }
+    let fetchUrl;
 
+    if (nelat) {
+      fetchUrl = `https://airbnb13.p.rapidapi.com/search-location?ne_lat=${nelat}&ne_lng=${nelng}&sw_lat=${swlat}&sw_lng=${swlng}&checkin=${checkIn}&checkout=${checkOut}&adults=1&page=1`;
+    } else if (location) {
+      fetchUrl = `https://airbnb13.p.rapidapi.com/search-location?location=${location}&checkin=${checkIn}&checkout=${checkOut}&adults=${adults}&children=${children}&infants=0&pets=${pets}&page=1&currency=KRW`;
+    }
+    const getData = await fetchData(fetchUrl, getOptions);
     setDetails(getData.results);
     setLoading(false);
   };

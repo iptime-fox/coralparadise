@@ -323,7 +323,7 @@ const SliderComponent = ({ mode }) => {
                         currentLocation.lat - 0.01
                       }&sw_lng=${
                         currentLocation.lng - 0.01
-                      }&checkin=2023-11-16&checkout=2023-11-17&adults=1&id=${id}`}>
+                      }&checkIn=2023-11-16&checkOut=2023-11-17&adults=1&id=${id}`}>
                       <h3>{name}</h3>
                     </Link>
                   </div>
