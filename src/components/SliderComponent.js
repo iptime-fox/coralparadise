@@ -124,10 +124,10 @@ const SliderComponent = ({ mode }) => {
       (position) => {
         const { latitude, longitude } = position.coords;
         setCurrentLocation({ lat: latitude, lng: longitude });
-        const ne_lat = latitude + 0.01;
-        const ne_lng = longitude + 0.01;
-        const sw_lat = latitude - 0.01;
-        const sw_lng = longitude - 0.01;
+        const ne_lat = latitude + 0.03;
+        const ne_lng = longitude + 0.03;
+        const sw_lat = latitude - 0.03;
+        const sw_lng = longitude - 0.03;
         getMyLocaData(ne_lat, ne_lng, sw_lat, sw_lng);
       },
       (error) => {
@@ -318,11 +318,11 @@ const SliderComponent = ({ mode }) => {
                     <span className='label'>{idx + 1}위</span>
                     <Link
                       to={`details?ne_lat=${
-                        currentLocation.lat + 0.01
-                      }&ne_lng=${currentLocation.lng + 0.01}&sw_lat=${
-                        currentLocation.lat - 0.01
+                        currentLocation.lat + 0.03
+                      }&ne_lng=${currentLocation.lng + 0.03}&sw_lat=${
+                        currentLocation.lat - 0.03
                       }&sw_lng=${
-                        currentLocation.lng - 0.01
+                        currentLocation.lng - 0.03
                       }&checkIn=2023-11-16&checkOut=2023-11-17&adults=1&id=${id}`}>
                       <h3>{name}</h3>
                     </Link>

@@ -39,10 +39,10 @@ const MapComponent = () => {
       (position) => {
         const { latitude, longitude } = position.coords;
         setCurrentLocation({ lat: latitude, lng: longitude });
-        const ne_lat = latitude + 0.01;
-        const ne_lng = longitude + 0.01;
-        const sw_lat = latitude - 0.01;
-        const sw_lng = longitude - 0.01;
+        const ne_lat = latitude + 0.03;
+        const ne_lng = longitude + 0.03;
+        const sw_lat = latitude - 0.03;
+        const sw_lng = longitude - 0.03;
         getMyLocaData(ne_lat, ne_lng, sw_lat, sw_lng);
       },
       (error) => {
