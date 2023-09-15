@@ -1,5 +1,29 @@
 import { styled } from 'styled-components';
 
+export const CustomSearchWrapper = styled.div`
+  text-align: center;
+  margin-top: 2rem;
+  h3 {
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 180%;
+    letter-spacing: 0.25rem;
+
+    select {
+      font-size: 1.8rem;
+      font-weight: 600;
+      text-decoration: underline;
+    }
+  }
+
+  .buttons {
+    width: 50%;
+    margin: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+`;
+
 export const SliderWrapper = styled.div`
   width: 100%;
   height: auto;

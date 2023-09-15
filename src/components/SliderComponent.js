@@ -7,7 +7,12 @@ import {
   RiArrowRightSLine,
   RiStarSFill,
 } from 'react-icons/ri';
-import { BestSlider, SliderTitle, SliderWrapper } from '../styles/SliderStyle';
+import {
+  BestSlider,
+  SliderTitle,
+  SliderWrapper,
+  CustomSearchWrapper,
+} from '../styles/SliderStyle';
 import { Container } from '../styles/ContainerStyle';
 import { fetchData, getOptions } from '../utils/fetchData';
 import { Link } from 'react-router-dom';
@@ -15,29 +20,6 @@ import Button from './Button';
 import { styled } from 'styled-components';
 import { getFormattedTodayDate, getFormattedTomorrowDate } from '../utils/util';
 
-const CustomSearchWrapper = styled.div`
-  text-align: center;
-  margin-top: 2rem;
-  h3 {
-    font-size: 1.8rem;
-    font-weight: 400;
-    line-height: 180%;
-    letter-spacing: 0.25rem;
-
-    select {
-      font-size: 1.8rem;
-      font-weight: 600;
-      text-decoration: underline;
-    }
-  }
-
-  .buttons {
-    width: 50%;
-    margin: auto;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-  }
-`;
 const SliderComponent = ({ mode }) => {
   const [slideHeight, setSlideHeight] = useState(null);
   const slideItemRef = useRef(null);

@@ -11,85 +11,20 @@ import { PiBathtubLight } from 'react-icons/pi';
 import { LiaBedSolid } from 'react-icons/lia';
 import SearchBoxes from './SearchBox';
 import { getFormattedTodayDate, getFormattedTomorrowDate } from '../utils/util';
-
-const Details = styled.div`
-  h4 {
-    font-size: 25px;
-    font-weight: 500;
-  }
-`;
-
-const TitleWrapper = styled.div`
-  /* width: 50%; */
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 2rem;
-`;
-
-const Title = styled.div`
-  /* width: 70%; */
-  h3 {
-    font-size: 25px;
-    font-weight: 500;
-  }
-  b {
-    font-size: 18px;
-    font-weight: 300;
-    color: #777;
-  }
-`;
-
-const HostWrapper = styled.div``;
-
-const HostImages = styled.img`
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-`;
-
-const InfoWrapper = styled.div`
-  margin-bottom: 2rem;
-`;
-
-const RoomInfoWrapper = styled.div`
-  margin-bottom: 2rem;
-`;
-
-const RoomInfoBoxWrapper = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: flex-start;
-  padding: 2rem;
-  column-gap: 2rem;
-  padding-left: 0;
-  text-align: center;
-`;
-
-const RoomInfo = styled.div`
-  width: 35%;
-  border: 1px solid black;
-  border-radius: 1rem;
-  padding: 2rem;
-`;
-
-const MapWrapper = styled.div``;
-
-const LeftDetails = styled.div`
-  width: 100%;
-`;
-
-const DetailWrapper = styled.div`
-  display: flex;
-  position: relative;
-  justify-content: space-between;
-  width: 100%;
-  /* column-gap: 3rem; */
-  div:nth-child(2) {
-    position: static;
-    transform: none;
-    justify-content: flex-end;
-  }
-`;
+import {
+  Details,
+  TitleWrapper,
+  Title,
+  HostWrapper,
+  HostImages,
+  InfoWrapper,
+  RoomInfoWrapper,
+  RoomInfoBoxWrapper,
+  RoomInfo,
+  MapWrapper,
+  LeftDetails,
+  DetailWrapper,
+} from '../styles/DetailStyle';
 
 export const DetailPage = () => {
   const [loading, setLoading] = useState(true);
