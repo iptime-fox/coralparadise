@@ -14,6 +14,14 @@ export const SearchListsBox = styled.form`
   display: flex;
   column-gap: 1rem;
   max-width: 900px;
+  @media screen and (max-width: 1200px) {
+    flex-wrap: wrap;
+    max-width: 600px;
+  }
+  @media screen and (max-width: 678px) {
+    flex-direction: column;
+    max-width: 450px;
+  }
 `;
 
 export const SearchBtn = styled.div`
@@ -56,6 +64,19 @@ export const SearchBtn = styled.div`
     cursor: pointer;
     color: #999;
   }
+  @media screen and (max-width: 1200px) {
+    &:nth-child(3) {
+      border-right: none;
+      padding-right: none;
+    }
+    &:nth-child(4) {
+      width: 90%;
+    }
+  }
+  @media screen and (max-width: 678px) {
+    border-right: none;
+    padding-right: none;
+  }
 `;
 
 export const SubmitBtn = styled.button`
@@ -67,6 +88,14 @@ export const SubmitBtn = styled.button`
     color: #fff;
     font-weight: 600;
     cursor: pointer;
+  }
+  @media screen and (max-width: 678px) {
+    margin: 0.5rem;
+    margin-top: 1rem;
+    i {
+      border-radius: 0.5rem;
+      padding: 0.65rem 1.5rem;
+    }
   }
 `;
 
@@ -117,5 +146,14 @@ export const SearchResult = styled.div`
   p {
     font-size: 14px;
     color: #999;
+  }
+  @media screen and (max-width: 1200px) {
+    width: 32%;
+  }
+  @media screen and (max-width: 800px) {
+    width: 47%;
+  }
+  @media screen and (max-width: 500px) {
+    width: 100%;
   }
 `;

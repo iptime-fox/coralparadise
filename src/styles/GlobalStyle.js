@@ -40,6 +40,9 @@ const GlobalStyles = createGlobalStyle`
 
   .section{
     padding:${({ theme }) => theme.el.sectionPadding};
+    @media screen and (max-width: 1200px) {
+    padding: 2rem 1rem;
+  }
   }
 
   

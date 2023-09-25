@@ -12,6 +12,14 @@ const DetailGridWrapper = styled.div`
   grid-template-areas:
     'a a b c'
     'a a d e';
+  @media screen and (max-width: 1000px) {
+    grid-auto-rows: 200px;
+    margin-top: 1.5rem;
+  }
+  @media screen and (max-width: 780px) {
+    grid-auto-rows: 160px;
+    margin-top: 1rem;
+  }
 `;
 
 const DetailImageWrapper = styled.div`

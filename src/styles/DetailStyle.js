@@ -77,4 +77,11 @@ export const DetailWrapper = styled.div`
     transform: none;
     justify-content: flex-end;
   }
+  @media screen and (max-width: 1000px) {
+    flex-direction: column;
+    padding: 2rem;
+    div:nth-child(2) {
+      justify-content: center;
+    }
+  }
 `;

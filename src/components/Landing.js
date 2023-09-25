@@ -17,6 +17,7 @@ import {
   UpperInputs,
   LowerInputs,
   InputNumWrapper,
+  LandingPageWrapper,
 } from '../styles/LandingStyle';
 import { Container } from '../styles/ContainerStyle';
 import { getFormattedTodayDate, getFormattedTomorrowDate } from '../utils/util';
@@ -36,8 +37,8 @@ const Landing = () => {
     getMainData();
   }, []);
   return (
-    <>
-      <Container style={{ paddingTop: '3rem' }}>
+    <LandingPageWrapper>
+      <Container className='container'>
         <LandingPage>
           <SearchBoxes />
           <MainImgWrapper>
@@ -48,7 +49,7 @@ const Landing = () => {
           </MainImgWrapper>
         </LandingPage>
       </Container>
-    </>
+    </LandingPageWrapper>
   );
 };
 export default Landing;

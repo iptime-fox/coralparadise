@@ -22,6 +22,14 @@ export const CustomSearchWrapper = styled.div`
     margin-top: 1rem;
     margin-bottom: 1rem;
   }
+  @media screen and (max-width: 1000px) {
+    h3 {
+      font-size: 1.5rem;
+      select {
+        font-size: 1.5rem;
+      }
+    }
+  }
 `;
 
 export const SliderWrapper = styled.div`
@@ -122,6 +130,9 @@ export const SliderTitle = styled.h3`
   text-align: center;
   font-size: 30px;
   font-weight: 500;
+  @media screen and (max-width: 1000px) {
+    font-size: 1.5rem;
+  }
 `;
 
 export const BestSlider = styled(SliderWrapper)`

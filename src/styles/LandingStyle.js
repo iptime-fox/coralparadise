@@ -1,5 +1,16 @@
 import { styled } from 'styled-components';
 
+export const LandingPageWrapper = styled.div`
+  & > .container {
+    padding-top: 3rem;
+  }
+  @media screen and (max-width: 1000px) {
+    & > .container {
+      padding: 0px 0px;
+    }
+  }
+`;
+
 export const LandingPage = styled.div`
   width: 100%;
   /* display: flex; */
@@ -9,7 +20,7 @@ export const LandingPage = styled.div`
 export const SearchBoxWrapper = styled.div`
   width: 100%;
   height: auto;
-  top: 50%;
+
   transform: translateY(-50%);
   top: 15rem;
   display: flex;
@@ -17,6 +28,11 @@ export const SearchBoxWrapper = styled.div`
   position: absolute;
   z-index: 10;
   /* flex-direction: column; */
+  @media screen and (max-width: 1000px) {
+    top: 50%;
+    justify-content: center;
+    /* position: static; */
+  }
 `;
 
 export const SearchBox = styled.div`
@@ -33,9 +49,20 @@ export const MainImgWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-end;
+  @media screen and (max-width: 1000px) {
+    justify-content: center;
+    object-fit: cover;
+  }
+  @media screen and (max-width: 678px) {
+    opacity: 0;
+  }
 `;
 export const MainImg = styled.img`
   width: 75%;
+  @media screen and (max-width: 1000px) {
+    width: 100%;
+    opacity: 0.5;
+  }
 `;
 
 export const TitleWrapper = styled.div`

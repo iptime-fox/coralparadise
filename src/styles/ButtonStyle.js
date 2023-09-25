@@ -10,6 +10,9 @@ export const CommonBtn = styled.button`
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.4s;
+  @media screen and (max-width: 600px) {
+    font-size: 13px;
+  }
 `;
 
 export const SubWhiteBtn = styled(CommonBtn)`
