@@ -16,10 +16,33 @@ export const HeaderSection = styled.header`
     .navi {
       display: flex;
       gap: 1.25rem;
+      align-items: center;
+
+      li.google-login img {
+        width: 18px;
+      }
 
       a {
         font-size: 1.125rem;
         font-weight: 500;
+      }
+
+      li.google-login button {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.9375rem;
+        border: 1px solid ${({ theme }) => theme.colors.point} !important;
+        padding: 0.25rem 0.75rem;
+        border-radius: 5px !important;
+        box-shadow: none !important;
+        div {
+          margin-right: 0 !important;
+          padding: 0.25rem 0 0.25rem 0.75rem !important;
+        }
+        span {
+          padding: 0.5rem 0.75rem !important;
+        }
       }
     }
   }
