@@ -1,7 +1,7 @@
 import React from 'react';
 import { GoogleLogin } from 'react-google-login';
 
-const clientId = process.env.REACT_APP_GOOGLE_LOGIN_CLIENT_ID;
+const clientId = process.env.REACT_APP_CLIENT_ID;
 
 const Login = ({ setProfileObj }) => {
   const onSuccess = (res) => {

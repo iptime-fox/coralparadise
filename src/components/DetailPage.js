@@ -48,7 +48,7 @@ export const DetailPage = () => {
     let fetchUrl;
 
     if (nelat) {
-      fetchUrl = `https://airbnb13.p.rapidapi.com/search-location?ne_lat=${nelat}&ne_lng=${nelng}&sw_lat=${swlat}&sw_lng=${swlng}&checkin=${checkIn}&checkout=${checkOut}&adults=1&page=1`;
+      fetchUrl = `https://airbnb13.p.rapidapi.com/search-location?ne_lat=${nelat}&ne_lng=${nelng}&sw_lat=${swlat}&sw_lng=${swlng}&checkin=${checkIn}&checkout=${checkOut}&adults=1&page=1&currency=KRW`;
     } else if (location) {
       fetchUrl = `https://airbnb13.p.rapidapi.com/search-location?location=${location}&checkin=${checkIn}&checkout=${checkOut}&adults=${adults}&children=${children}&infants=0&pets=${pets}&page=1&currency=KRW`;
     }
@@ -96,6 +96,7 @@ export const DetailPage = () => {
                           <b>
                             {room.city} ★ {room.rating}
                           </b>
+                          <p> ₩ {room.price.rate}</p>
                         </Title>
                         <HostWrapper>
                           <HostImages src={room.hostThumbnail}></HostImages>
@@ -103,7 +104,8 @@ export const DetailPage = () => {
                       </TitleWrapper>
                       <InfoWrapper>
                         <h4>숙소 정보</h4>
-                        <p>{room.type}</p>
+
+                        <p>{room.type} </p>
                       </InfoWrapper>
                       <RoomInfoWrapper>
                         <h4>숙소 시설</h4>

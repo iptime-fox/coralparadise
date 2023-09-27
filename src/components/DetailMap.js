@@ -42,7 +42,7 @@ const DetailMap = ({ lati, long }) => {
 
   if (loadError) return 'Error';
   if (!isLoaded) return 'Maps';
-  console.log(long);
+  // console.log(long);
   return (
     <MapContainer>
       <Container className='map-wrapper'>

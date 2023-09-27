@@ -25,6 +25,10 @@ export const Title = styled.div`
     font-weight: 300;
     color: #777;
   }
+  p {
+    font-size: 20px;
+    margin-top: 0.5rem;
+  }
 `;
 
 export const HostWrapper = styled.div``;
